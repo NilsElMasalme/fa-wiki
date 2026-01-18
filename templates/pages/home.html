@@ -1,0 +1,400 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - FAForever Wiki{% endblock %}
+
+{% block content %}
+<!-- Hero Banner -->
+<div class="hero-banner" style="background-image: url('{{ url_for('static', filename='assets/banners/banner.jpg') }}');">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">Welcome to <span>FAForever</span></h1>
+        <p class="hero-subtitle">The community-driven multiplayer experience for Supreme Commander: Forged Alliance</p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('main.getting_started') }}" class="btn btn-primary btn-lg">Get Started</a>
+            <a href="https://www.faforever.com/client" target="_blank" class="btn btn-ghost btn-lg">Download Client</a>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Bar -->
+<div class="hero-stats">
+    <div class="hero-stat">
+        <span class="hero-stat-value">2,847</span>
+        <span class="hero-stat-label">Players Online</span>
+    </div>
+    <div class="hero-stat">
+        <span class="hero-stat-value">156</span>
+        <span class="hero-stat-label">Games Running</span>
+    </div>
+    <div class="hero-stat">
+        <span class="hero-stat-value">12,453</span>
+        <span class="hero-stat-label">Total Players</span>
+    </div>
+    <div class="hero-stat">
+        <span class="hero-stat-value">3,200+</span>
+        <span class="hero-stat-label">Maps Available</span>
+    </div>
+</div>
+
+<!-- Dashboard Content -->
+<div class="dashboard-ultrawide">
+    <!-- Row 1: News + Leaderboard + Quick Links -->
+    <div class="dash-row three-col">
+        <!-- News & Announcements -->
+        <div class="card col-main">
+            <div class="card-header">
+                <h3 class="card-title">News & Announcements</h3>
+                <a href="{{ url_for('main.page', slug='news') }}" class="btn btn-ghost btn-sm">View All</a>
+            </div>
+            <div class="card-body">
+                <div class="news-list">
+                    {% for news in news_items %}
+                    <div class="news-item">
+                        <span class="news-category {{ news.category }}">{{ news.category }}</span>
+                        <h4 class="news-title"><a href="#">{{ news.title }}</a></h4>
+                        <p class="news-excerpt">{{ news.excerpt }}</p>
+                        <div class="news-meta">
+                            <span>{{ news.date }}</span>
+                            <span>by {{ news.author }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Top Players (1v1)</h3>
+            </div>
+            <div class="card-body compact">
+                <div class="leaderboard-list">
+                    <div class="leaderboard-item gold">
+                        <span class="lb-rank">1</span>
+                        <span class="lb-name">Nexus</span>
+                        <span class="lb-rating">2847</span>
+                    </div>
+                    <div class="leaderboard-item silver">
+                        <span class="lb-rank">2</span>
+                        <span class="lb-name">Tagada</span>
+                        <span class="lb-rating">2756</span>
+                    </div>
+                    <div class="leaderboard-item bronze">
+                        <span class="lb-rank">3</span>
+                        <span class="lb-name">Farms</span>
+                        <span class="lb-rating">2698</span>
+                    </div>
+                    <div class="leaderboard-item">
+                        <span class="lb-rank">4</span>
+                        <span class="lb-name">Yudi</span>
+                        <span class="lb-rating">2654</span>
+                    </div>
+                    <div class="leaderboard-item">
+                        <span class="lb-rank">5</span>
+                        <span class="lb-name">Grimplex</span>
+                        <span class="lb-rating">2612</span>
+                    </div>
+                </div>
+                <a href="https://www.faforever.com/competitive/leaderboards/1v1" target="_blank" class="btn btn-ghost btn-sm btn-block">Full Ranking</a>
+            </div>
+
+            <!-- TMM Leaderboard -->
+            <div class="card-header" style="border-top: 1px solid var(--border-color);">
+                <h3 class="card-title">Top Teams (2v2)</h3>
+            </div>
+            <div class="card-body compact">
+                <div class="leaderboard-list">
+                    <div class="leaderboard-item gold">
+                        <span class="lb-rank">1</span>
+                        <span class="lb-name">Nexus + Tagada</span>
+                        <span class="lb-rating">2580</span>
+                    </div>
+                    <div class="leaderboard-item silver">
+                        <span class="lb-rank">2</span>
+                        <span class="lb-name">Farms + Yudi</span>
+                        <span class="lb-rating">2495</span>
+                    </div>
+                    <div class="leaderboard-item bronze">
+                        <span class="lb-rank">3</span>
+                        <span class="lb-name">Sladow + Javi</span>
+                        <span class="lb-rating">2412</span>
+                    </div>
+                    <div class="leaderboard-item">
+                        <span class="lb-rank">4</span>
+                        <span class="lb-name">Petric + Blodir</span>
+                        <span class="lb-rating">2356</span>
+                    </div>
+                    <div class="leaderboard-item">
+                        <span class="lb-rank">5</span>
+                        <span class="lb-name">Turin + Swkoll</span>
+                        <span class="lb-rating">2298</span>
+                    </div>
+                </div>
+                <a href="https://www.faforever.com/competitive/leaderboards/2v2" target="_blank" class="btn btn-ghost btn-sm btn-block">Full Ranking</a>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Quick Links</h3>
+            </div>
+            <div class="card-body compact">
+                <div class="quick-links">
+                    <a href="https://www.faforever.com/client" target="_blank" class="quick-link">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        Download Client
+                    </a>
+                    <a href="https://discord.gg/mXahVSKGVb" target="_blank" class="quick-link">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.12-.098.246-.198.373-.292a.074.074 0 0 1 .078.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078-.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+                        Join Discord
+                    </a>
+                    <a href="https://forum.faforever.com" target="_blank" class="quick-link">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/></svg>
+                        Forums
+                    </a>
+                    <a href="{{ url_for('main.page', slug='tutorials') }}" class="quick-link">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3z"/></svg>
+                        Tutorials
+                    </a>
+                    <a href="https://wiki.faforever.com" target="_blank" class="quick-link">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        Old Wiki
+                    </a>
+                    <a href="https://github.com/FAForever" target="_blank" class="quick-link">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+
+            <!-- Server Status Section -->
+            <div class="card-header" style="border-top: 1px solid var(--border-color);">
+                <h3 class="card-title">Server Status</h3>
+            </div>
+            <div class="card-body compact">
+                <div class="server-status-list">
+                    <div class="server-status-item">
+                        <span class="status-dot online"></span>
+                        <span>Game Server</span>
+                        <span class="status-label online">Online</span>
+                    </div>
+                    <div class="server-status-item">
+                        <span class="status-dot online"></span>
+                        <span>API Server</span>
+                        <span class="status-label online">Online</span>
+                    </div>
+                    <div class="server-status-item">
+                        <span class="status-dot online"></span>
+                        <span>Lobby Server</span>
+                        <span class="status-label online">Online</span>
+                    </div>
+                    <div class="server-status-item">
+                        <span class="status-dot online"></span>
+                        <span>Replay Vault</span>
+                        <span class="status-label online">Online</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Image Banner -->
+    <div class="featured-banner">
+        <img src="{{ url_for('static', filename='assets/banners/banner2.jpg') }}" alt="FAForever">
+        <div class="featured-banner-overlay">
+            <h3>Join the Battle</h3>
+            <p>Epic battles with thousands of units across land, sea, and air</p>
+        </div>
+    </div>
+
+    <!-- Row 2: Guides + Events + Unit Spotlight -->
+    <div class="dash-row">
+        <!-- Featured Guides -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Getting Started</h3>
+            </div>
+            <div class="card-body compact">
+                <div class="guides-list">
+                    <a href="{{ url_for('main.page', slug='beginners-guide') }}" class="guide-item">
+                        <div class="guide-icon green">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <div class="guide-text">
+                            <h4>Beginner's Guide</h4>
+                            <p>Start here</p>
+                        </div>
+                    </a>
+                    <a href="{{ url_for('main.page', slug='eco-guide') }}" class="guide-item">
+                        <div class="guide-icon blue">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                        </div>
+                        <div class="guide-text">
+                            <h4>Economy</h4>
+                            <p>Mass & Energy</p>
+                        </div>
+                    </a>
+                    <a href="{{ url_for('main.page', slug='faction-guide') }}" class="guide-item">
+                        <div class="guide-icon orange">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg>
+                        </div>
+                        <div class="guide-text">
+                            <h4>Factions</h4>
+                            <p>UEF, Cybran, Aeon, Seraphim</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Upcoming Events</h3>
+            </div>
+            <div class="card-body compact">
+                <div class="events-list">
+                    <div class="event-item">
+                        <div class="event-date">
+                            <span class="event-day">25</span>
+                            <span class="event-month">Jan</span>
+                        </div>
+                        <div class="event-info">
+                            <h4>League Season 15 Finals</h4>
+                            <p>Top 8 players compete</p>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-date">
+                            <span class="event-day">01</span>
+                            <span class="event-month">Feb</span>
+                        </div>
+                        <div class="event-info">
+                            <h4>Community Game Night</h4>
+                            <p>4v4 casual games</p>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-date">
+                            <span class="event-day">08</span>
+                            <span class="event-month">Feb</span>
+                        </div>
+                        <div class="event-info">
+                            <h4>Mapping Contest</h4>
+                            <p>Winners announced</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit Spotlight with Image -->
+        <div class="card spotlight-card">
+            <div class="spotlight-image-wrap">
+                <img src="{{ url_for('static', filename='assets/spiderbot.png') }}" alt="Monkeylord">
+            </div>
+            <div class="spotlight-content">
+                <span class="spotlight-label">Unit Spotlight</span>
+                <h4>Monkeylord</h4>
+                <span class="faction-tag cybran">Cybran T4</span>
+                <p>Devastating spider bot with high HP and amphibious capability.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row 3: Activity + Patch + Maps -->
+    <div class="dash-row">
+        <!-- Recent Activity -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Recent Activity</h3>
+            </div>
+            <div class="card-body compact">
+                <div class="activity-list">
+                    {% for activity in activities %}
+                    <div class="activity-item">
+                        <div class="activity-icon {{ activity.type }}">
+                            {% if activity.type == 'edit' %}
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/></svg>
+                            {% elif activity.type == 'add' %}
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                            {% else %}
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"/></svg>
+                            {% endif %}
+                        </div>
+                        <div class="activity-content">
+                            <span class="activity-text">{{ activity.text|safe }}</span>
+                            <span class="activity-time">{{ activity.time }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Patch Notes -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Latest Patch</h3>
+                <span class="version-badge">v3812</span>
+            </div>
+            <div class="card-body compact">
+                <div class="patch-content">
+                    <h4>Balance</h4>
+                    <ul>
+                        <li>Aeon T3 Sniper: 2400 → 2200 dmg</li>
+                        <li>UEF Titan shield: +500 HP</li>
+                        <li>Cybran Hoplite range: +3</li>
+                    </ul>
+                    <a href="{{ url_for('main.page', slug='patch-notes') }}" class="btn btn-ghost btn-sm btn-block">Full Notes</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popular Maps -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Popular Maps</h3>
+            </div>
+            <div class="card-body compact">
+                <div class="maps-list">
+                    <div class="map-item">
+                        <div class="map-preview green"></div>
+                        <div class="map-info">
+                            <h4>Dual Gap</h4>
+                            <span>8 players</span>
+                        </div>
+                    </div>
+                    <div class="map-item">
+                        <div class="map-preview blue"></div>
+                        <div class="map-info">
+                            <h4>Setons Clutch</h4>
+                            <span>8 players</span>
+                        </div>
+                    </div>
+                    <div class="map-item">
+                        <div class="map-preview brown"></div>
+                        <div class="map-info">
+                            <h4>Astro Crater</h4>
+                            <span>2 players</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://www.faforever.com/maps" target="_blank" class="btn btn-ghost btn-sm btn-block">Browse Maps</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Game Art Footer -->
+<div class="game-banner">
+    <img src="{{ url_for('static', filename='assets/game-cover.jpg') }}" alt="Supreme Commander">
+    <div class="game-banner-overlay">
+        <h3>Supreme Commander: Forged Alliance</h3>
+        <p>Epic RTS with massive scale battles</p>
+        <a href="{{ url_for('main.getting_started') }}" class="btn btn-primary">Start Playing</a>
+    </div>
+</div>
+{% endblock %}

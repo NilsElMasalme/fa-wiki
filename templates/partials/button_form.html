@@ -1,0 +1,46 @@
+<div class="edit-modal-overlay">
+    <div class="edit-modal">
+        <div class="edit-modal-header">
+            <h3 class="edit-modal-title">{{ 'Edit' if button else 'Add' }} Button</h3>
+            <button class="edit-modal-close" onclick="closeEditModal()">&times;</button>
+        </div>
+        <form action="{{ url_for('api.update_button', button_id=button.id) if button else url_for('api.create_button') }}" method="POST">
+            <div class="edit-modal-body">
+                <input type="hidden" name="page_slug" value="{{ page_slug }}">
+                <input type="hidden" name="section_id" value="{{ section }}">
+
+                <div class="form-group">
+                    <label class="form-label">Label</label>
+                    <input type="text" class="form-input" name="label" value="{{ button.label if button else '' }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <input type="text" class="form-input" name="description" value="{{ button.description if button else '' }}">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Link URL</label>
+                    <input type="text" class="form-input" name="link_url" value="{{ button.link_url if button else '#' }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Link Type</label>
+                    <select class="form-input" name="link_type">
+                        <option value="internal" {{ 'selected' if not button or button.link_type == 'internal' else '' }}>Internal</option>
+                        <option value="external" {{ 'selected' if button and button.link_type == 'external' else '' }}>External</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Icon URL (optional)</label>
+                    <input type="text" class="form-input" name="icon_url" value="{{ button.icon_url if button else '' }}">
+                </div>
+            </div>
+            <div class="edit-modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

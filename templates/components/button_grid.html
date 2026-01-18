@@ -1,0 +1,54 @@
+{# Reusable button grid component #}
+{# Parameters: buttons (list), show_descriptions (bool), editor_mode (bool), section_id (string) #}
+
+<div class="button-grid {% if sub_page %}button-grid-sub{% endif %}"
+     {% if editor_mode %}data-section="{{ section_id }}"{% endif %}>
+    {% for button in buttons %}
+    <a href="{{ button.link_url }}"
+       class="nav-button {% if sub_page %}nav-button-sub{% endif %} editable-content"
+       {% if button.link_type == 'external' %}target="_blank" rel="noopener"{% endif %}
+       data-button-id="{{ button.id }}">
+
+        {% if editor_mode %}
+        <div class="edit-overlay">
+            <button class="edit-overlay-btn edit-btn" data-action="edit" title="Edit">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                </svg>
+            </button>
+            <button class="edit-overlay-btn delete" data-action="delete" title="Delete">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                </svg>
+            </button>
+        </div>
+        {% endif %}
+
+        <div class="nav-button-icon">
+            {% if button.icon_url %}
+            <img src="{{ button.icon_url }}" alt="">
+            {% else %}
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            {% endif %}
+        </div>
+        <span class="nav-button-label">{{ button.label }}</span>
+        {% if show_descriptions and button.description %}
+        <span class="nav-button-description">{{ button.description }}</span>
+        {% endif %}
+    </a>
+    {% endfor %}
+
+    {% if editor_mode %}
+    <!-- Add new button placeholder -->
+    <div class="add-content-placeholder"
+         data-action="add-button"
+         data-section="{{ section_id }}"
+         hx-get="{{ url_for('api.button_form') }}"
+         hx-target="#editModal"
+         hx-swap="innerHTML">
+        <div class="add-content-placeholder-icon">+</div>
+    </div>
+    {% endif %}
+</div>

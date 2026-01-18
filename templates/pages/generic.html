@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page.title }} - FAForever Wiki{% endblock %}
+
+{% block content %}
+<h1 class="section-title">{{ page.title }}</h1>
+
+<div class="text-content editable-content" data-section="page-content">
+    {% if editor_mode %}
+    <div id="pageEditor">{{ content_html|safe if content_html else '<p>Click to add content...</p>' }}</div>
+    {% else %}
+    {{ content_html|safe if content_html else '<p>Content coming soon...</p>' }}
+    {% endif %}
+</div>
+
+{% if editor_mode %}
+<input type="hidden" id="pageSlug" value="{{ page.slug }}">
+{% endif %}
+
+<div id="editModal"></div>
+{% endblock %}
+
+{% block scripts %}
+{% if editor_mode %}
+<script>
+    const quill = new Quill('#pageEditor', {
+        theme: 'snow',
+        modules: { toolbar: false }
+    });
+
+    document.querySelectorAll('.editor-btn[data-command]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const command = btn.dataset.command;
+            const value = btn.dataset.value;
+            switch(command) {
+                case 'bold': quill.format('bold', !quill.getFormat().bold); break;
+                case 'italic': quill.format('italic', !quill.getFormat().italic); break;
+                case 'underline': quill.format('underline', !quill.getFormat().underline); break;
+                case 'strike': quill.format('strike', !quill.getFormat().strike); break;
+                case 'list': quill.format('list', value); break;
+                case 'align': quill.format('align', value || false); break;
+                case 'link':
+                    const url = prompt('Enter URL:');
+                    if (url) quill.format('link', url);
+                    break;
+            }
+        });
+    });
+
+    document.getElementById('headerSelect')?.addEventListener('change', (e) => {
+        quill.format('header', e.target.value ? parseInt(e.target.value) : false);
+    });
+
+    document.getElementById('saveAllBtn')?.addEventListener('click', async () => {
+        const content = quill.root.innerHTML;
+        const saveUrl = '{{ url_for("api.update_page_content", slug=page.slug) }}';
+        try {
+            const response = await fetch(saveUrl, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: content })
+            });
+            document.getElementById('editorStatus').className = response.ok ? 'editor-status saved' : 'editor-status error';
+            document.querySelector('.editor-status-text').textContent = response.ok ? 'Saved' : 'Error';
+        } catch (e) {
+            console.error('Save error:', e);
+            document.getElementById('editorStatus').className = 'editor-status error';
+        }
+    });
+</script>
+{% endif %}
+{% endblock %}

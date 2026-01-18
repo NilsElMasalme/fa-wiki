@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="cybranGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff3333;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b0000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Cybran - Spider/Circuit style -->
+  <circle cx="50" cy="50" r="20" fill="url(#cybranGrad)" stroke="#ff6666" stroke-width="2"/>
+  <circle cx="50" cy="50" r="8" fill="#1a1a1a"/>
+  <!-- Spider legs -->
+  <line x1="50" y1="30" x2="50" y2="5" stroke="#ff3333" stroke-width="4" stroke-linecap="round"/>
+  <line x1="50" y1="70" x2="50" y2="95" stroke="#ff3333" stroke-width="4" stroke-linecap="round"/>
+  <line x1="30" y1="50" x2="5" y2="50" stroke="#ff3333" stroke-width="4" stroke-linecap="round"/>
+  <line x1="70" y1="50" x2="95" y2="50" stroke="#ff3333" stroke-width="4" stroke-linecap="round"/>
+  <line x1="35" y1="35" x2="15" y2="15" stroke="#ff3333" stroke-width="4" stroke-linecap="round"/>
+  <line x1="65" y1="35" x2="85" y2="15" stroke="#ff3333" stroke-width="4" stroke-linecap="round"/>
+  <line x1="35" y1="65" x2="15" y2="85" stroke="#ff3333" stroke-width="4" stroke-linecap="round"/>
+  <line x1="65" y1="65" x2="85" y2="85" stroke="#ff3333" stroke-width="4" stroke-linecap="round"/>
+</svg>

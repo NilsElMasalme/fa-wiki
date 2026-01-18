@@ -1,0 +1,236 @@
+/* FAForever Wiki - Animations */
+
+/* Intro Animation */
+.intro-container {
+    animation: introFadeIn 0.5s ease forwards;
+}
+
+.intro-container.fade-out {
+    animation: introFadeOut 0.8s ease forwards;
+}
+
+@keyframes introFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes introFadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+/* Button Sequential Appear Animation */
+.nav-button {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    animation: buttonAppear 0.6s ease forwards;
+}
+
+.nav-button:nth-child(1) { animation-delay: 0.1s; }
+.nav-button:nth-child(2) { animation-delay: 0.25s; }
+.nav-button:nth-child(3) { animation-delay: 0.4s; }
+.nav-button:nth-child(4) { animation-delay: 0.55s; }
+.nav-button:nth-child(5) { animation-delay: 0.7s; }
+.nav-button:nth-child(6) { animation-delay: 0.85s; }
+.nav-button:nth-child(7) { animation-delay: 1s; }
+.nav-button:nth-child(8) { animation-delay: 1.15s; }
+
+@keyframes buttonAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    70% {
+        transform: translateY(-5px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Skip animation class - instantly shows all buttons */
+body.skip-animation .nav-button,
+body.animation-skipped .nav-button {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: none;
+}
+
+body.skip-animation .intro-container,
+body.animation-skipped .intro-container {
+    display: none !important;
+}
+
+/* Page Transitions */
+.page-enter {
+    animation: pageEnter 0.4s ease forwards;
+}
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Glow Pulse Animation (for hover effects) */
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px var(--accent-orange-glow);
+    }
+    50% {
+        box-shadow: 0 0 40px var(--accent-orange-glow-strong);
+    }
+}
+
+.nav-button:hover {
+    animation: glowPulse 2s ease infinite;
+}
+
+/* Icon Bounce on Hover */
+@keyframes iconBounce {
+    0%, 100% {
+        transform: scale(1.1) translateY(0);
+    }
+    50% {
+        transform: scale(1.1) translateY(-5px);
+    }
+}
+
+.nav-button:hover .nav-button-icon {
+    animation: iconBounce 0.6s ease;
+}
+
+/* Loading Spinner */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--accent-orange);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Fade In Up - Generic */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scale In */
+.scale-in {
+    opacity: 0;
+    transform: scale(0.9);
+    animation: scaleIn 0.3s ease forwards;
+}
+
+@keyframes scaleIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Slide In from Right */
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(30px);
+    animation: slideInRight 0.4s ease forwards;
+}
+
+@keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Stagger delay utility classes */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+.stagger-7 { animation-delay: 0.7s; }
+.stagger-8 { animation-delay: 0.8s; }
+
+/* Video/Image intro specific */
+.intro-media {
+    animation: introMediaZoom 3s ease forwards;
+}
+
+@keyframes introMediaZoom {
+    0% {
+        transform: scale(1.1);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Flash message auto-hide */
+.flash-message {
+    animation: slideIn 0.3s ease, fadeOut 0.5s ease 4.5s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .nav-button {
+        opacity: 1;
+        transform: none;
+    }
+
+    .intro-container {
+        display: none;
+    }
+}

@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}Rules - FAForever Wiki{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Community <span>Rules</span></h1>
+    <p class="page-description">Our guidelines ensure everyone has a great experience on FAForever.</p>
+</div>
+
+<!-- Rules Categories -->
+<div class="feature-grid">
+    <a href="{{ url_for('main.rules_detail', slug='general-rules') }}" class="feature-card clickable">
+        <div class="feature-icon orange">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+            </svg>
+        </div>
+        <h3>General Rules</h3>
+        <p>Core community guidelines covering respect, fair play, account rules, and general behavior expectations for all FAF players.</p>
+    </a>
+    <a href="{{ url_for('main.rules_detail', slug='vault-rules') }}" class="feature-card clickable">
+        <div class="feature-icon blue">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 6h-4v2h4v2h-4v2h4v2H9V7h6v2z"/>
+            </svg>
+        </div>
+        <h3>Vault Rules</h3>
+        <p>Guidelines for uploading and sharing maps and mods in the FAF vault. Quality standards, naming conventions, and content requirements.</p>
+    </a>
+    <a href="{{ url_for('main.rules_detail', slug='chat-rules') }}" class="feature-card clickable">
+        <div class="feature-icon green">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+            </svg>
+        </div>
+        <h3>Chat Rules</h3>
+        <p>Communication guidelines for in-game chat, lobby, Discord server, and forums. Language policy and behavior expectations.</p>
+    </a>
+    <a href="{{ url_for('main.page', slug='moderation-policy') }}" class="feature-card clickable">
+        <div class="feature-icon red">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+        </div>
+        <h3>Moderation Policy</h3>
+        <p>How rule violations are handled, appeal process, ban durations, and the moderation team's approach to enforcement.</p>
+    </a>
+</div>
+
+<!-- Quick Reference -->
+<div class="card" style="margin-top: 2rem;">
+    <div class="card-header">
+        <h3 class="card-title">
+            <svg class="card-title-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </svg>
+            Quick Reference
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="rules-quick-ref">
+            <div class="rule-summary">
+                <span class="rule-icon bad">x</span>
+                <span>No cheating, hacking, or exploiting bugs</span>
+            </div>
+            <div class="rule-summary">
+                <span class="rule-icon bad">x</span>
+                <span>No multiple accounts (smurfs)</span>
+            </div>
+            <div class="rule-summary">
+                <span class="rule-icon bad">x</span>
+                <span>No harassment or hate speech</span>
+            </div>
+            <div class="rule-summary">
+                <span class="rule-icon bad">x</span>
+                <span>No intentionally ruining games</span>
+            </div>
+            <div class="rule-summary">
+                <span class="rule-icon good">OK</span>
+                <span>Be respectful to all players</span>
+            </div>
+            <div class="rule-summary">
+                <span class="rule-icon good">OK</span>
+                <span>Report rule violations via Discord</span>
+            </div>
+            <div class="rule-summary">
+                <span class="rule-icon good">OK</span>
+                <span>Appeal bans through proper channels</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Need Help? -->
+<div class="dashboard-grid" style="margin-top: 2rem;">
+    <div class="card col-6">
+        <div class="card-header">
+            <h3 class="card-title">Need to Report?</h3>
+        </div>
+        <div class="card-body">
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                If you witness rule violations, please report them to the moderation team. Include replay IDs and screenshots when possible.
+            </p>
+            <a href="https://discord.gg/mXahVSKGVb" target="_blank" class="btn btn-primary btn-sm">
+                Report on Discord
+            </a>
+        </div>
+    </div>
+    <div class="card col-6">
+        <div class="card-header">
+            <h3 class="card-title">Appeal a Ban?</h3>
+        </div>
+        <div class="card-body">
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                If you've been banned and want to appeal, visit the forums or contact the moderation team on Discord. Be polite and provide context.
+            </p>
+            <a href="https://forum.faforever.com/" target="_blank" class="btn btn-ghost btn-sm">
+                Visit Forums
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="editModal"></div>
+{% endblock %}

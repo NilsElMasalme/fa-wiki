@@ -1,0 +1,55 @@
+<div class="edit-modal-overlay">
+    <div class="edit-modal">
+        <div class="edit-modal-header">
+            <h3 class="edit-modal-title">{{ 'Edit' if chart else 'Add' }} Radar Chart</h3>
+            <button class="edit-modal-close" onclick="closeEditModal()">&times;</button>
+        </div>
+        <form action="{{ url_for('api.create_radar') }}" method="POST">
+            <div class="edit-modal-body">
+                <input type="hidden" name="team_id" value="{{ team_id }}">
+                <div class="form-group">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-input" name="title" value="{{ chart.title if chart else '' }}" required>
+                </div>
+                <div class="radar-editor">
+                    <label class="form-label">Axes & Values</label>
+                    <div class="radar-axis-list" id="radarAxes">
+                        {% if chart %}
+                            {% for axis in chart.get_axes() %}
+                            <div class="radar-axis-item">
+                                <input type="text" class="radar-axis-input" name="axes[]" value="{{ axis }}" placeholder="Axis name">
+                                <input type="number" class="radar-axis-value form-input" name="values[]" value="{{ chart.get_data()[loop.index0] if chart.get_data()|length > loop.index0 else 50 }}" min="0" max="100">
+                                <button type="button" class="radar-axis-delete" onclick="this.parentElement.remove()">&times;</button>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="radar-axis-item">
+                                <input type="text" class="radar-axis-input" name="axes[]" placeholder="Axis name">
+                                <input type="number" class="radar-axis-value form-input" name="values[]" value="50" min="0" max="100">
+                                <button type="button" class="radar-axis-delete" onclick="this.parentElement.remove()">&times;</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <button type="button" class="add-axis-btn" onclick="addRadarAxis()">+ Add Axis</button>
+                </div>
+            </div>
+            <div class="edit-modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+function addRadarAxis() {
+    const list = document.getElementById('radarAxes');
+    const item = document.createElement('div');
+    item.className = 'radar-axis-item';
+    item.innerHTML = `
+        <input type="text" class="radar-axis-input" name="axes[]" placeholder="Axis name">
+        <input type="number" class="radar-axis-value form-input" name="values[]" value="50" min="0" max="100">
+        <button type="button" class="radar-axis-delete" onclick="this.parentElement.remove()">&times;</button>
+    `;
+    list.appendChild(item);
+}
+</script>

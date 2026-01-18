@@ -1,0 +1,39 @@
+<footer class="footer">
+    <div class="footer-content">
+        <!-- Etiquette -->
+        <div class="footer-section">
+            <h4>Etiquette</h4>
+            <ul>
+                <li><a href="{{ url_for('main.page', slug='contribution-guidelines') }}">Contribution Guidelines</a></li>
+                <li><a href="{{ url_for('main.rules') }}">Rules</a></li>
+            </ul>
+        </div>
+
+        <!-- Contribute -->
+        <div class="footer-section">
+            <h4>Contribute</h4>
+            <ul>
+                <li><a href="{{ url_for('main.page', slug='contributions') }}">Contributions</a></li>
+                <li><a href="{{ url_for('main.page', slug='donations') }}">Donations</a></li>
+            </ul>
+        </div>
+
+        <!-- Legal -->
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <ul>
+                <li><a href="{{ url_for('main.page', slug='privacy') }}">Privacy Statement</a></li>
+                <li><a href="{{ url_for('main.page', slug='terms') }}">Terms of Service</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Us -->
+        <div class="footer-section">
+            <h4>Contact Us</h4>
+            <ul>
+                <li><a href="https://discord.gg/mXahVSKGVb" target="_blank" rel="noopener">Discord</a></li>
+                <li><a href="https://forum.faforever.com/" target="_blank" rel="noopener">Forums</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>

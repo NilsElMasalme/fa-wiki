@@ -1,0 +1,20 @@
+{% for review in reviews %}
+<div class="review-card" data-review-id="{{ review.id }}">
+    <div class="review-header">
+        <h3 class="review-title">{{ review.title }}</h3>
+        <div class="review-meta">
+            {% if review.gamemode %}<span>{{ review.gamemode }}</span>{% endif %}
+            {% if review.map_name %}<span>{{ review.map_name }}</span>{% endif %}
+            <span>{{ review.published_at.strftime('%Y-%m-%d') }}</span>
+        </div>
+    </div>
+    <div class="review-content">
+        {{ review.content_html|safe }}
+    </div>
+    {% if review.author %}
+    <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem;">
+        - {{ review.author }}
+    </p>
+    {% endif %}
+</div>
+{% endfor %}

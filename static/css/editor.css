@@ -1,0 +1,528 @@
+/* FAForever Wiki - Editor Mode Styles */
+
+/* Editor Toolbar */
+.editor-toolbar {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: var(--bg-secondary);
+    border-bottom: 2px solid var(--accent-orange);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    gap: 0.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.editor-mode .page-wrapper {
+    padding-top: calc(var(--header-height) + 50px);
+}
+
+.editor-toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0 0.75rem;
+    border-right: 1px solid var(--border-color);
+}
+
+.editor-toolbar-group:last-child {
+    border-right: none;
+}
+
+.editor-btn {
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.editor-btn:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.editor-btn.active {
+    background: var(--accent-orange);
+    color: var(--bg-primary);
+    border-color: var(--accent-orange);
+}
+
+.editor-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.editor-select {
+    height: 36px;
+    padding: 0 0.75rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.editor-select:focus {
+    outline: none;
+    border-color: var(--accent-orange);
+}
+
+.editor-toolbar-spacer {
+    flex: 1;
+}
+
+.editor-save-btn {
+    padding: 0.5rem 1rem;
+    background: var(--accent-orange);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--bg-primary);
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all var(--transition-fast);
+}
+
+.editor-save-btn:hover {
+    background: var(--accent-orange-light);
+}
+
+.editor-save-btn.saving {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.editor-exit-btn {
+    padding: 0.5rem 1rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.editor-exit-btn:hover {
+    border-color: var(--error);
+    color: var(--error);
+}
+
+/* Add Content Placeholder */
+.add-content-placeholder {
+    width: 100%;
+    min-height: 120px;
+    border: 2px dashed var(--text-muted);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    margin: 1rem 0;
+    background: transparent;
+}
+
+.add-content-placeholder:hover {
+    border-color: var(--accent-orange);
+    background: rgba(255, 140, 0, 0.05);
+}
+
+.add-content-placeholder-icon {
+    width: 48px;
+    height: 48px;
+    border: 2px dashed var(--text-muted);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--text-muted);
+    transition: all var(--transition-normal);
+}
+
+.add-content-placeholder:hover .add-content-placeholder-icon {
+    border-color: var(--accent-orange);
+    color: var(--accent-orange);
+}
+
+/* Button Grid Add Placeholder */
+.button-grid .add-content-placeholder {
+    aspect-ratio: 1;
+    min-height: auto;
+}
+
+/* Editable Content Overlay */
+.editable-content {
+    position: relative;
+}
+
+.editable-content::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px dashed transparent;
+    border-radius: var(--radius-md);
+    pointer-events: none;
+    transition: border-color var(--transition-fast);
+}
+
+body.editor-mode .editable-content:hover::after {
+    border-color: var(--accent-orange);
+}
+
+/* Edit Button Overlay */
+.edit-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    border-radius: inherit;
+}
+
+body.editor-mode .editable-content:hover .edit-overlay {
+    opacity: 1;
+}
+
+.edit-overlay-btn {
+    width: 40px;
+    height: 40px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.edit-overlay-btn:hover {
+    border-color: var(--accent-orange);
+    color: var(--accent-orange);
+}
+
+.edit-overlay-btn.delete:hover {
+    border-color: var(--error);
+    color: var(--error);
+}
+
+.edit-overlay-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Inline Text Editing */
+.editable-text {
+    outline: none;
+    min-height: 1em;
+}
+
+body.editor-mode .editable-text:focus {
+    background: rgba(255, 140, 0, 0.1);
+    box-shadow: 0 0 0 2px var(--accent-orange);
+    border-radius: var(--radius-sm);
+}
+
+/* Edit Modal */
+.edit-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.edit-modal {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: scaleIn 0.2s ease;
+}
+
+.edit-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.edit-modal-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-orange);
+}
+
+.edit-modal-close {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.edit-modal-close:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.edit-modal-body {
+    padding: 1.5rem;
+}
+
+.edit-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Image Upload Preview */
+.image-upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.image-upload-area:hover {
+    border-color: var(--accent-orange);
+}
+
+.image-upload-area.dragover {
+    border-color: var(--accent-orange);
+    background: rgba(255, 140, 0, 0.1);
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: var(--radius-md);
+    margin-top: 1rem;
+}
+
+/* Radar Chart Editor */
+.radar-editor {
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.radar-axis-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.radar-axis-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.radar-axis-input {
+    flex: 1;
+    padding: 0.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+}
+
+.radar-axis-value {
+    width: 60px;
+    text-align: center;
+}
+
+.radar-axis-delete {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.radar-axis-delete:hover {
+    border-color: var(--error);
+    color: var(--error);
+}
+
+.add-axis-btn {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--bg-secondary);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+    width: 100%;
+}
+
+.add-axis-btn:hover {
+    border-color: var(--accent-orange);
+    color: var(--accent-orange);
+}
+
+/* Drag and Drop Sorting */
+.sortable-ghost {
+    opacity: 0.4;
+}
+
+.sortable-drag {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.sortable-chosen {
+    border-color: var(--accent-orange) !important;
+}
+
+/* Status Indicator */
+.editor-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.editor-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-muted);
+}
+
+.editor-status.saving .editor-status-dot {
+    background: var(--warning);
+    animation: pulse 1s infinite;
+}
+
+.editor-status.saved .editor-status-dot {
+    background: var(--success);
+}
+
+.editor-status.error .editor-status-dot {
+    background: var(--error);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Quill Editor Customization */
+.ql-toolbar.ql-snow {
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.ql-container.ql-snow {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.ql-editor {
+    color: var(--text-primary);
+    min-height: 150px;
+}
+
+.ql-editor.ql-blank::before {
+    color: var(--text-muted);
+}
+
+.ql-snow .ql-stroke {
+    stroke: var(--text-secondary);
+}
+
+.ql-snow .ql-fill {
+    fill: var(--text-secondary);
+}
+
+.ql-snow .ql-picker {
+    color: var(--text-secondary);
+}
+
+.ql-snow .ql-picker-options {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+.ql-snow .ql-picker-item:hover {
+    color: var(--accent-orange);
+}
+
+.ql-snow button:hover .ql-stroke,
+.ql-snow .ql-picker-label:hover .ql-stroke {
+    stroke: var(--accent-orange);
+}
+
+.ql-snow button:hover .ql-fill,
+.ql-snow .ql-picker-label:hover .ql-fill {
+    fill: var(--accent-orange);
+}
+
+.ql-snow button.ql-active .ql-stroke {
+    stroke: var(--accent-orange);
+}
+
+.ql-snow button.ql-active .ql-fill {
+    fill: var(--accent-orange);
+}
