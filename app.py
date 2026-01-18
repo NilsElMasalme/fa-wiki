@@ -679,12 +679,12 @@ def seed_comprehensive_data():
         if Team.query.count() > 0:
             return
 
-        # Demo users
-        admin = User(username='admin', email='admin@faf.wiki')
+        # Demo users (example.com is a reserved domain for testing)
+        admin = User(username='admin', email='admin@example.com')
         admin.set_password('admin123')
         db.session.add(admin)
 
-        editor_teams = User(username='editor_teams', email='teams@faf.wiki')
+        editor_teams = User(username='editor_teams', email='editor@example.com')
         editor_teams.set_password('editor123')
         db.session.add(editor_teams)
 
